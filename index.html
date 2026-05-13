@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amir ANTRA - Portfolio BTS SIO SLAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --red: #e63946;
+    --red2: #c1121f;
+    --bg: #111111;
+    --bg2: #1a1a1a;
+    --bg3: #222222;
+    --text: #f0f0f0;
+    --text2: #999999;
+    --border: #2e2e2e;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 100; background: #111111ee; border-bottom: 1px solid var(--border); padding: 0 2rem; }
+  .nav-inner { max-width: 900px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { font-size: 16px; font-weight: 700; color: var(--red); }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav-links a { color: var(--text2); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--red); }
+
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+  section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
+  section:last-child { border-bottom: none; }
+
+  /* HERO */
+  #hero { min-height: 85vh; display: flex; flex-direction: column; justify-content: center; }
+  .hero-tag { font-size: 12px; color: var(--red); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; }
+  .hero-name { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.1; margin-bottom: 0.5rem; }
+  .hero-name span { color: var(--red); }
+  .hero-sub { font-size: 1rem; color: var(--text2); margin-bottom: 1.5rem; }
+  .hero-desc { max-width: 500px; color: var(--text2); line-height: 1.75; font-size: 14px; margin-bottom: 2rem; }
+  .hero-btns { display: flex; gap: 0.8rem; }
+  .btn { padding: 0.6rem 1.3rem; border-radius: 4px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; display: inline-block; }
+  .btn-red { background: var(--red); color: #fff; border: none; }
+  .btn-red:hover { background: var(--red2); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--red); color: var(--red); }
+
+  .s-tag { font-size: 11px; color: var(--red); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .s-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 1.5rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .tl-item { position: relative; padding: 0 0 2rem 1.5rem; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot { position: absolute; left: -5px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--red); }
+  .tl-date { font-size: 11px; color: var(--red); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .tl-title { font-size: 15px; font-weight: 600; margin-bottom: 0.15rem; }
+  .tl-place { font-size: 13px; color: var(--text2); margin-bottom: 0.5rem; }
+  .tl-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+  .tag { font-size: 11px; padding: 2px 8px; border-radius: 3px; background: var(--bg3); color: var(--red); border: 1px solid #3a1a1a; }
+
+  /* COMPÉTENCES */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
+  .skill-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 1.1rem; }
+  .skill-card-title { font-size: 12px; font-weight: 600; color: var(--red); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 0.8rem; }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .skill-tag { font-size: 12px; padding: 3px 9px; border-radius: 3px; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+
+  /* CERTIF */
+  .certif-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 1.2rem 1.4rem; display: flex; align-items: center; gap: 1rem; max-width: 380px; }
+  .certif-icon { font-size: 28px; }
+  .certif-name { font-size: 14px; font-weight: 600; margin-bottom: 0.15rem; }
+  .certif-org { font-size: 12px; color: var(--text2); }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.8rem; max-width: 650px; }
+  .contact-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 1rem 1.2rem; display: flex; align-items: center; gap: 0.75rem; }
+  .contact-icon { font-size: 18px; }
+  .contact-label { font-size: 11px; color: var(--text2); margin-bottom: 1px; }
+  .contact-val { font-size: 13px; font-weight: 500; }
+
+  footer { text-align: center; padding: 1.5rem; color: var(--text2); font-size: 12px; border-top: 1px solid var(--border); }
+
+  @media(max-width:600px){
+    .nav-links { gap: 0.8rem; }
+    .hero-name { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <span class="nav-logo">Amir ANTRA</span>
+    <ul class="nav-links">
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#experience">Expérience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section id="hero">
+    <div class="hero-tag">Portfolio — BTS SIO SLAM</div>
+    <h1 class="hero-name">Amir <span>ANTRA</span></h1>
+    <p class="hero-sub">Étudiant en BTS SIO — Option SLAM</p>
+    <p class="hero-desc">Passionné par le développement informatique, étudiant au Lycée Georges Brassens à Rive-de-Gier.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-red">Me contacter</a>
+      <a href="#parcours" class="btn btn-outline">Mon parcours</a>
+    </div>
+  </section>
+
+  <section id="profil">
+    <div class="s-tag">Profil</div>
+    <h2 class="s-title">À propos de moi</h2>
+    <p style="max-width:560px;color:var(--text2);line-height:1.8;font-size:14px">
+      Je suis étudiant en BTS Services Informatiques aux Organisations option SLAM au Lycée Georges Brassens à Rive-de-Gier. Passionné par le développement informatique, je m'implique dans mes projets avec sérieux et motivation.
+    </p>
+  </section>
+
+  <section id="parcours">
+    <div class="s-tag">Parcours</div>
+    <h2 class="s-title">Mon parcours scolaire</h2>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Sept 2025 — Aujourd'hui</div>
+        <div class="tl-title">BTS SIO — Option SLAM</div>
+        <div class="tl-place">Lycée Georges Brassens, Rive-de-Gier — Loire (42)</div>
+        <div class="tl-desc">BTS Services Informatiques aux Organisations, Option Solutions Logicielles et Applications Métiers. Formation en cours.</div>
+        <div class="tags">
+          <span class="tag">BTS SIO</span>
+          <span class="tag">SLAM</span>
+          <span class="tag">En cours</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Sept 2022 — Juin 2025</div>
+        <div class="tl-title">BAC STI2D — Option SIN</div>
+        <div class="tl-place">Lycée Lasalle St Louis Ste Barbe, Saint-Étienne — Loire (42)</div>
+        <div class="tl-desc">Baccalauréat Sciences et Technologies de l'Industrie et du Développement Durable, spécialité Systèmes d'Information et Numérique.</div>
+        <div class="tags">
+          <span class="tag">STI2D</span>
+          <span class="tag">SIN</span>
+          <span class="tag">Obtenu</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Sept 2018 — Juin 2022</div>
+        <div class="tl-title">Collège — Brevet des collèges</div>
+        <div class="tl-place">Collège Les Maristes — Loire (42)</div>
+        <div class="tl-desc">Obtention du Diplôme National du Brevet.</div>
+        <div class="tags">
+          <span class="tag">DNB</span>
+          <span class="tag">Obtenu</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="competences">
+    <div class="s-tag">Compétences</div>
+    <h2 class="s-title">Mes compétences</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Dev Web & App</div>
+        <div class="skill-list">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">PHP</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Frameworks</div>
+        <div class="skill-list">
+          <span class="skill-tag">JavaFX</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Outils</div>
+        <div class="skill-list">
+          <span class="skill-tag">Git & GitHub</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">VMware</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Cybersécurité</div>
+        <div class="skill-list">
+          <span class="skill-tag">Wireshark (compétences de base)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="s-tag">Certifications</div>
+    <h2 class="s-title">Certifications</h2>
+    <div class="certif-card">
+      <div class="certif-icon">🛡️</div>
+      <div>
+        <div class="certif-name">MOOC SecNumAcadémie</div>
+        <div class="certif-org">Formation Cybersécurité — ANSSI • 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="s-tag">Expérience</div>
+    <h2 class="s-title">Expérience professionnelle</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Mai 2026 — Juin 2026 &nbsp;(7 semaines)</div>
+        <div class="tl-title">Stage : IT Pro</div>
+        <div class="tl-place">19 rue Grand Moulin</div>
+        <div class="tl-desc">Activités à définir.</div>
+        <div class="tags">
+          <span class="tag">Stage</span>
+          <span class="tag">7 semaines</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="s-tag">Contact</div>
+    <h2 class="s-title">Me contacter</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-val">amir.antra8@gmail.com</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div>
+          <div class="contact-label">Localisation</div>
+          <div class="contact-val">Rive-de-Gier, Loire (42)</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🎓</span>
+        <div>
+          <div class="contact-label">Formation</div>
+          <div class="contact-val">BTS SIO — SLAM</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🏫</span>
+        <div>
+          <div class="contact-label">Lycée</div>
+          <div class="contact-val">Georges Brassens, Rive-de-Gier</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>© 2026 — Amir ANTRA — Portfolio BTS SIO SLAM</footer>
+
+</body>
+</html>
